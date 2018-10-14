@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8" />
+<head>
+
+<title>current activity</title>
+
+<link rel="stylesheet" type="text/css" href="CSS/activityPage.css" />
+<link rel="stylesheet" type="text/css" href="CSS/activity.css" />
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="CSS/style1.css" />
+<script src="js/ajaxRefresh.js"></script>
+	
+</head>
+
+<body class="wrapper" onLoad="start()">
+
+	<div class="container">
+		
+		<header class="iconheader">
+<!--			upper left corner;-->
+			<a href="HomePage.html"><i class="fa fa-home fa-2x"></i></a>
+			&nbsp;&nbsp;&nbsp;
+			<h1>Biking activity.</h1>
+<!--			upper right corner;-->
+			<nav class="nav">
+				<button onClick="stopActivity()" id="stop_button">stop and save</button>
+				
+				<button id="dingdong" onClick="dingdong()" hidden="true">audio</button>
+			</nav>
+		</header>
+		
+		<div class="content">
+			<canvas width="1" height="1" id="container" style="position:absolute"></canvas>
+			
+			<div class="message-display">
+			<p style="width: 100%"><span id="content"></span></p>
+			</div>
+			
+			<div class="slide">
+<!--				<div class="speed">Current average speep (km/hr).</div>-->
+				<div class="energy_title">Current energy generated (watts)</div>
+				<div class="speed_message" id="energy"><small></small></div>
+			</div>
+		
+			<nav class="content__nav">
+				<a class="nav-item" ><i class="fa fa-clock fa-2x"></i><span id="currenttime"></span></a>
+				&nbsp;
+				<a class="nav-item" ><i class="fa fa-flag fa-2x"></i><span id="country"></span></a>
+				<a class="nav-item"><i class="fa fa-hourglass-half fa-2x"></i><span id="timer"></span></a>
+				<a class="nav-item" ><i class="fa fa-tachometer-alt fa-2x"></i><span id="speed"></span></a>
+				<a class="nav-item" ><i class="fa fa-male fa-2x"></i><span id="user"></span></a>
+			</nav>
+		</div>
+	</div>
+
+
+</body>
+</html>

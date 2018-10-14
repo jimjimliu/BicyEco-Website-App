@@ -1,0 +1,125 @@
+@font-face {
+	font-family: 'icomoon';
+	font-weight: normal;
+	font-style: normal;
+}
+
+.icon {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+
+.content {
+	position: relative;
+	height: 100vh;
+	width: 100vw;
+	background: url(../Source/texture-rain-fg.png)no-repeat center top;
+	background-size: cover;
+	overflow: hidden;
+}
+
+.content::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.slide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 35vh 0 0 0;
+	pointer-events: none;
+	line-height: 1;
+	font-family: "Roboto", sans-serif;
+}
+
+
+.content__nav {
+	text-align: center;
+	width: 100%;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-align-items: center;
+	align-items: center;
+	position: absolute;
+	bottom: 28vh;
+}
+
+.nav-item {
+	display: block;
+	padding: 1em;
+	color: #252445;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+.nav-item:hover,
+.nav-item:focus,
+.nav-item--current {
+	color: #fff;
+}
+
+.nav-item .icon {
+	font-size: 2em;
+}
+
+.nav-item span {
+	display: block;
+	margin: 0.25em 0 0 0;
+	font-weight: 700;
+}
+
+
+
+.speed_message {
+	font-size: 8em;
+	font-weight: 700;
+	margin: 0 0 0.1em;
+}
+
+.speed_message small {
+	font-size: 0.25em;
+}
+
+.slide__element--info {
+	font-size: 2em;
+}
+
+.energy_title {
+	font-size: 1em;
+	font-weight: 700;
+	margin: 0 0 1em;
+}
+
+@media screen and (max-height: 39em) {
+	.content {
+		font-size: 75%;
+	}
+	.slide {
+		padding-top: 35vh;
+	}
+	.content__nav {
+		bottom: 6em;
+	}
+}

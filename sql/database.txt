@@ -1,0 +1,152 @@
+create schema project4900;
+
+-- table to store users' personal information
+-- integer can be given to varchar, but cannot do arithmic
+CREATE TABLE project4900.users
+(
+
+    user_email character varying(99) not null,
+    user_password character varying(99)  NOT NULL,
+    user_first_name character varying(99)  NOT NULL,
+    user_last_name character varying(99)  NOT NULL,
+    user_age integer NOT NULL,
+    user_weight numeric(5,2) NOT NULL,
+    user_height numeric(5,2) NOT NULL,
+    user_weekly_activity_time numeric(6,0) NOT NULL,
+    user_registered_date date not null,
+
+    CONSTRAINT users_pkey PRIMARY KEY (user_email)
+);
+
+--  create table contains user activity data
+-- simply store mutiple information of the same user, no PK;
+CREATE TABLE project4900.user_info
+(
+    user_email varchar(99) NOT NULL,
+    activity_date date NOT NULL,
+    activity_end_time time not null,
+    activity_duration integer NOT NULL,
+    calory_burned integer NOT NULL,
+    biking_distance numeric(8,4) NOT NULL,
+    watts numeric(8,4) not null,
+    country varchar(99) not null,
+    CONSTRAINT user_info_user_id_fkey FOREIGN KEY (user_email)
+        REFERENCES project4900.users (user_email) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+
+create table project4900.country(
+
+user_email varchar(99) not null,
+country varchar(99) not null,
+date_of_choice date not null,
+primary key(user_email,date_of_choice),
+foreign key (user_email) references project4900.users(user_email)
+on update cascade
+on delete cascade
+);
+
+-- table to test ajax functionality
+CREATE TABLE project4900.test
+(
+    speed integer
+);
+
+
+insert into project4900.users values('test10@test.com',12345678,'test','whatever',23,60,174,80, '2018-04-01');
+insert into project4900.country values('test10@test.com','South Sudan','2018-03-26');
+
+insert into project4900.user_info values
+('test10@test.com','2018-03-11','03:03:19',30,110,12, 56.12, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-03-12','03:03:19',45,98,12, 40, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-03-13','03:03:19',32,80,12, 72.14, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-03-14','03:03:19',23,113,12, 80, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-03-15','03:03:19',18,45,12, 23, 'Haiti');
+insert into project4900.user_info values
+('test10@test.com','2018-03-16','03:03:19',21,35,12, 53, 'Haiti');
+insert into project4900.user_info values
+('test10@test.com','2018-03-10','03:03:19',56,156,12, 31, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-03-09','03:03:19',10,98,12, 43, 'South Sudan');
+
+insert into project4900.user_info values
+('test10@test.com','2018-02-11','03:03:19',30,110,12, 56.12, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-02-12','03:03:19',45,98,12, 40, 'Haiti');
+insert into project4900.user_info values
+('test10@test.com','2018-02-13','03:03:19',32,80,12, 72.14, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-02-14','03:03:19',23,113,12, 80, 'Niger');
+insert into project4900.user_info values
+('test10@test.com','2018-02-15','03:03:19',18,45,12, 23, 'Niger');
+insert into project4900.user_info values
+('test10@test.com','2018-02-16','03:03:19',21,35,12, 53, 'Ethiopia');
+insert into project4900.user_info values
+('test10@test.com','2018-02-10','03:03:19',56,156,12, 31, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-02-09','03:03:19',10,98,12, 43, 'South Sudan');
+
+insert into project4900.user_info values
+('test10@test.com','2018-01-11','03:03:19',30,110,12, 56.12, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-01-12','03:03:19',45,98,12, 40, 'Niger');
+insert into project4900.user_info values
+('test10@test.com','2018-01-13','03:03:19',32,80,12, 72.14, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-01-14','03:03:19',23,113,12, 80, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-01-15','03:03:19',18,45,12, 23, 'Tanzania');
+insert into project4900.user_info values
+('test10@test.com','2018-01-16','03:03:19',21,35,12, 53, 'Tanzania');
+insert into project4900.user_info values
+('test10@test.com','2018-01-10','03:03:19',56,156,12, 31, 'South Sudan');
+insert into project4900.user_info values
+('test10@test.com','2018-01-09','03:03:19',10,98,12, 43, 'Tanzania');
+
+insert into project4900.user_info values
+('test10@test.com','2018-02-10','03:03:19',56,156,12, 31, 'Haiti');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

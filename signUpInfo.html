@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <meta charset="utf-8">
+   <head>
+	   <!-- adjust login panel size -->
+	   <script>
+		!function() {
+			var designFontSize = 10 || 10;
+			document.documentElement.style.fontSize = designFontSize + "px";
+		}();
+	   </script>
+	    
+	    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+		<link rel="stylesheet" href="CSS/common.css">
+		<link rel="stylesheet" href="CSS/login.css">
+	   
+		<title>sign up information.</title>
+<!--	   auto complete email text in the form-->
+		<script src="JS/autoloadEmailInput.js"></script>
+<!--	    js input form validation-->
+	    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+<!--	   js form validation-->
+		<script type="text/javascript" src="JS/formValidation.js"></script>
+	
+	</head>
+	
+	<body onLoad="autoload()">
+	
+	<div class="header">
+		<nav class="wrapper-wider">
+			<!-- icon, click to go back to main page -->
+			<div class="head-left">
+				<a href="HomePage.html"><i class="fa fa-home fa-3x"></i></a>
+				<div class="iconheader">
+				<h1>Bicy-Eco.</h1>
+				</div>
+			</div>
+			
+			<div class="head-right">
+				<div class="nav-pc">
+					
+					<a href="loginPage.html" class="login-trigger">
+						<i class="fa fa-user"></i>
+						<span>login/register</span>
+					</a>
+				</div>
+			</div>
+			
+		</nav>
+	</div>
+	
+	<div class="content-wrapper">
+		<div class="login-wrapper">
+			<h2>
+<!--				<a href="loginPage.html"><span class="login-btn">login</span></a>-->
+				<span class="register-btn active">Please complete the form before you can start.</span>
+			</h2>
+			
+
+			<div class="" style="position: relative; margin-top: 30px;">
+				<form method="post" action="signingUp.php" id="reg-form" class="reg-form">
+
+<!--
+					-----------------------------
+					the first input field will be automatically filled when loading the web page,
+					calls autoloadEmailInput.js to auto fill the input email,
+					inorder to prevent unnecessary steps to handle situation that user enter an incorrect email;
+					-----------------------------
+-->
+					<div class="input-wrapper">
+						
+						<i class="fa fa-mail-forward"></i>
+						<input type="email" placeholder="" name="email" class="input phone-num"
+							   easyform="email;real-time;" message="please enter email in the right format." easytip="disappear:lost-focus;theme:green;" id="email" readonly="true"/>
+					</div>
+					
+					<div class="input-wrapper">
+						
+						<i class="fa fa-user"></i>
+						<input type="text" placeholder="Frist Name" name="firstName" class="input username"
+							   easyform="char-normal;real-time;" message="enter first name." easytip="disappear:lost-focus;theme:green;" id="fname">
+					</div>
+					
+					<div class="input-wrapper">
+						
+						<i class="fa fa-user"></i>
+						<input type="text" placeholder="Last Name" name="lastName" class="input username"
+							   easyform="char-normal;real-time;" message="enter last name." easytip="disappear:lost-focus;theme:green;" id="lname"/>
+					</div>
+					
+					<div class="input-wrapper">
+						
+						<i class="fa fa-user-md"></i>
+						<input type="text" placeholder="body weight (kg)" name="body-weight" class="input username"
+							   easyform="length:2-3;real-time;" message="enter body weight(kg) between 2-3 digits." easytip="disappear:lost-focus;theme:green;" id="bweight"/>
+					</div>
+					
+					<div class="input-wrapper">
+						
+						<i class="fa fa-male"></i>
+						<input type="text" placeholder="Height (cm)" name="height" class="input username"
+							   easyform="length:3;real-time;" message="enter height in 3 digits." easytip="disappear:lost-focus;theme:green;" id="height">
+					</div>
+					
+					<div class="input-wrapper">
+						
+						<i class="fa fa-user"></i>
+						<input type="text" placeholder="Age" name="age" class="input username"
+							   easyform="length:1-2;real-time;" message="enter age between 1-2 digits." easytip="disappear:lost-focus;theme:green;" id="age"/>
+					</div>
+					
+					<div class="input-wrapper">
+						
+						<i class="fa fa-clock-o"></i>
+						<input type="text" placeholder="Weekly activity time" name="activityTime" class="input username"
+							   easyform="length:1-5;real-time;" message="enter weekly activity time(minutes) staring from 0minutes." easytip="disappear:lost-focus;theme:green;" id="atime">
+					</div>
+					
+					<input type="submit" value="Sign Up" class="submit">
+				</form>
+				<div class="bottom"></div>
+			</div>
+		</div>
+		
+	</div>
+	
+	</body>
+	   <footer class="footer"><div class="footer-wrapper"><div class="copyright">2018 &copy; Bicy-Eco.</div></div></footer>
+	   
+<!--
+------------------
+script to auto load the form validition functionality;
+------------------
+-->
+	<script type="text/javascript">
+
+		$(document).ready(function(){$('#reg-form').easyform();});
+
+	</script>
+	</html>

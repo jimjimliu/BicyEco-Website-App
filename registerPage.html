@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+   <html lang="zh-Hans">
+   <meta charset="utf-8">
+   <head>
+	   <!-- adjust login panel size -->
+	   <script>
+		!function() {
+			var designFontSize = 10 || 10;
+			document.documentElement.style.fontSize = designFontSize + "px";
+		}();
+	   </script>
+	    
+	<!--	    CSS icon libary, ready to invoke. 
+				In HTML <i></i> tag, indicate class arrtibute "fa fa-xxxx" to invoke the icon.
+    	-->
+	    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+		<link rel="stylesheet" href="CSS/common.css">
+		<link rel="stylesheet" href="CSS/login.css">
+	   
+		<title>register</title>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<!--	   js form validation-->
+		<script type="text/javascript" src="JS/formValidation.js"></script>
+	   	<script type="text/javascript" src ="JS/register.js"></script>
+
+	</head>
+	
+	<body>
+	
+	<div class="header">
+		<nav class="wrapper-wider">
+			<!-- icon, click to go back to main page -->
+			<div class="head-left">
+				<a href="HomePage.html"><i class="fa fa-home fa-3x"></i></a>
+				<div class="iconheader">
+				<h1>Bicy-Eco.</h1>
+				</div>
+			</div>
+			
+			<div class="head-right">
+				<div class="nav-pc">
+					
+					<a href="loginPage.html" class="login-trigger">
+						<i class="fa fa-user"></i>
+						<span>login/register</span>
+					</a>
+				</div>
+			</div>
+			
+		</nav>
+	</div>
+	
+	<div class="content-wrapper">
+		<div class="login-wrapper">
+			<h2>
+				<a href="loginPage.html"><span class="login-btn">login</span></a>
+				<a href=""><span class="register-btn active">sign up</span></a>
+			</h2>
+			
+
+			<div class="" style="position: relative; margin-top: 30px;">
+				<div  id="reg-form" class="reg-form">
+					
+					<div class="input-wrapper">
+						
+						<i class="fa fa-mail-forward"></i>
+						
+						<input type="email" placeholder="email" name="email" class="input phone-num"
+							   easyform="email;real-time;" message="please enter email in the right format." easytip="disappear:lost-focus;theme:green;" id="email"/>
+						
+					</div>
+					<div class="input-wrapper">
+						
+						<i class="fa fa-lock"></i>
+						<input type="password" placeholder="password" name="password" class="input password"
+							   easyform="length:6-16;real-time;" message="password must between 6-16 digits." easytip="disappear:lost-focus;theme:green;" id="psw1">
+					</div>
+					
+					<div class="input-wrapper">
+						
+						<i class="fa fa-lock"></i>
+						<input type="password" placeholder="re-enter you password." name="re-enter-password" class="input password"
+							   easyform="length:6-16;equal:#psw1;real-time;" message="password do not match." easytip="disappear:lost-focus;theme:green;" id="psw2"/>
+					</div>
+					<button onClick="register()">Sign UP</button>
+					<input onClick="Autofresh()" value="Sign Up" class="submit" readonly="true">
+				</div>
+				<div class="bottom"></div>
+			</div>
+		</div>
+		
+	</div>
+	
+	</body>
+	   <footer class="footer" style="position: relative;margin-top: 300px;"><div class="footer-wrapper"><div class="copyright">2018 &copy; Bicy-Eco.</div></div></footer>
+	   
+	   
+<!--
+------------------
+script to auto load the form validition functionality;
+------------------
+-->
+	<script type="text/javascript">
+
+		$(document).ready(function(){$('#reg-form').easyform();});
+
+	</script>
+	</html>

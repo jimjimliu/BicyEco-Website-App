@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+  <html lang="en">
+   <head>
+<!--
+   if safari render render some font style and icons：
+   GOTO: safari -> preferences -> Advance -> default encoding ->
+   choose UTF-8。
+	Junhan Liu 2018-02-01
+   If google chrome does not auto-sync up with changes in the css code,
+   then clear all the cache, cookies, buffer memory histories in the chrome setiing;
+-->
+		<meta charset="utf-8"> 
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	
+		<!--	    CSS icon libary, ready to invoke. 
+				In HTML <i></i> tag, indicate class arrtibute "fa fa-xxxx" to invoke the icon.
+    	-->
+	  <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+		<!--	   	common style sheet-->
+		<link rel="stylesheet" href="CSS/common.css">
+		<link rel="stylesheet" href="CSS/home.css">
+	   	<!--	   	panel style reference:view-source:https://www.jiesc.net/example/css3-accordion-share-menu/index.html-->
+	   	<link rel="stylesheet" href="css/homepanel.css">
+		<title></title>
+ 	</head>
+ <body>
+ 	
+ 	<script>
+
+		/* ======================================================
+		调整背景视频，适应屏幕大小
+		====================================================== */
+		(function(){
+		
+  		var height = window.innerHeight,
+			width = document.body.clientWidth;
+			if(typeof height != 'number'){
+					height = document.body.clientHeight;
+				}
+  		var ratio = height/width;
+			document.write('<style>.video-head-wrap{padding-bottom:' + ratio*100 + '% !important;}.body-wrap{padding-top:' + ratio*100 + '%;}</style>');
+			//origianl video size: 874*454;
+			//set the size parameters to the original video's size;
+  		if(ratio>(454/874)){
+    		var leftOffset = -(height*874/454 - width)/2;
+			document.write('<style>#video-bg{height:100%;margin-left:'+leftOffset+'px;}</style>');
+  		}else{
+    		var topOffset = -(width*454/874 - height)/2;
+			document.write('<style>#video-bg{width:100%;margin-top:'+topOffset+'px;}</style>');
+  		}
+		})();
+		
+		/* ======================================================
+		@param: cookie name
+		@returns: cookie中储存的用户登录邮箱
+		====================================================== */
+		function getCookie(cname){
+				//retrive the value coded in cookie, returns only one string;
+				//the format of returned string is jliu187%40uottawa.ca, '@' character is somehow still coded; solved 2018-02-10;
+
+				  var name = cname + "=";
+				  var ca = document.cookie.split(';');
+				  for(var i=0; i<ca.length; i++) 
+				  {
+						var c = ca[i].trim();
+						if (c.indexOf(name)==0){ 
+							var word = c.substring(name.length,c.length);//this will return cookie like this:jliu187%40uottawa.ca;
+							return word;
+					}
+				  }
+				  return "";
+			}
+		/* ======================================================
+		function that controls the redirection of login button;
+		if the user cookie has been expired redirect to personal information page directly,
+		re-login other wise;
+		====================================================== */
+		function redirect(){
+			if(getCookie("useremail") === ""){
+				window.location.href = 'loginPage.html';
+			}
+			else{
+				window.location.href = 'infoDisplay.php';
+			}
+		}
+		
+		function redirectToActivity(){
+			
+			if(getCookie("useremail") === ""){
+				window.location.href = 'loginPage.html';
+			}
+			else{
+				window.location.href = 'currentActivity.html';
+			}
+		}
+	</script>
+	 
+	 <div class="body-wrap">
+	 	<div class="header">
+			<nav class="wrapper-wider">
+
+				<!-- up left corner icon-->
+				<div class="head-left">
+					<div class="iconheader">
+					<h1>Bicy-Eco.</h1>
+					</div>
+				</div>
+
+				<div class="head-right" style="height: 60px;">
+					<div class="nav-pc">
+						
+						<a onClick="redirect()" >
+							<i class="fa fa-user"></i>
+							<span>login/register</span>
+						</a>
+					</div>
+
+				</div>
+			</nav>
+	 		
+	  </div>
+	 		
+		<header class="video-head-wrap">
+		<div class="video-container">
+		<video id="video-bg" src="Source/bikingVideo.mp4" muted autoplay loop></video>
+		<div class="video-control">
+		</div>
+			
+		
+			<div class="container-button">
+			<div class="toggle-button">
+				<div class="cubeshape cube">
+				<div class="first_cube">
+					<h1><a onClick="redirectToActivity()">Start Activity</a></h1>
+				</div>
+				<div class="second_cube" id="root">
+					<h1><a onclick="redirectToActivity()">Start</a></h1>
+				</div>
+				</div>
+			</div>
+		</div>
+			
+		
+		
+		</div>
+		</header>
+	 		
+	 		<div class="content-wrap">
+	 		<section>
+				
+			<div class="" style="background-color: #fff;padding:120px 0 10px;">
+				<div class="container">
+					<ul class="accordion">
+					  <li class="tabs">
+						<div class="panel-links icon-personal">
+						  <a></a>
+						</div>
+						<div class="paragraph">
+						  <h1>Personal</h1>
+						  <p>Sign and login to view our amazing functionalities to provide your information.
+							<a href="registerPage.html">Sign up now.</a></p>
+						</div>
+					  </li>
+					  <li class="tabs">
+						<div class="panel-links profile-icon">
+						  <a></a>
+						</div>
+						<div class="paragraph">
+						  <h1>Profile</h1>
+						  <p>View/update your personal information, activity history.</p>
+						</div>
+					  </li>
+					  <li class="tabs">
+						  
+						<div class="panel-links history-icon">
+						   <a></a>
+						</div>
+						<div class="paragraph">
+						  <h1>Activity History</h1>
+						  <p>We provide you an awsome view to track your pysical activities.</p>
+						</div>
+					  </li>
+					  <li class="tabs">
+						<div class="panel-links setting-icon">
+						  <a></a>
+						</div>
+						<div class="paragraph">
+						  <h1>Settings</h1>
+						  <p>Manage your password, update your personal information, or change your country.</p>
+						</div>
+					  </li>
+					  <li class="tabs">
+						<div class="panel-links activity-icon">
+						  <a></a>
+						</div>
+						<div class="paragraph">
+						  <h1>Start your activity</h1>
+						  <p>Click start to make a change right away. Monitor your activity in real time.</p>
+						</div>
+					  </li>
+					  <li class="tabs">
+						<div class="panel-links country-icon">
+						  <a></a>
+						</div>
+						<div class="paragraph">
+						  <h1>Green donation</h1>
+						  <p>View countries donation distribution. Donate more to countries lack of green energy.</p>
+						</div>
+					  </li>
+					  <li class="tabs">
+						<div class="panel-links chart-icon">
+						  <a></a>
+						</div>
+						<div class="paragraph">
+						  <h1>Visulization</h1>
+						  <p>Awsome and simple interface. Track your activity history more easily.</p>
+						</div>
+					  </li>
+					</ul>
+  				</div>
+			</div>
+				
+	 		<div class="paragraph run-para"><div class="para-title">Biking& history/energt donation recording </div><div class="para-text">Precisly record your activity data, green energy donation history& we provide you an excellent opportunity to exercise for you and for others.</div></div>
+				
+			<div class="run-wrap">
+				<div class="run-wrap-inner">
+					<div class="run-track-wrap">
+						<img src="Source/chartist.jpg">
+					</div>
+					
+					<div class="run-track-wrap2">
+						<img src="Source/chart.jpg">
+					</div>
+			
+					<div class="run-data">
+						<div class="data-block">
+							<div class="data-title">
+								<span class="text-line"></span>
+								<span>Total running distance</span>
+							</div>
+							<div class="data-val">8415.57</div>
+							<div class="data-unit">Kilometers</div>
+						</div>
+						<div class="data-block-right">
+							<div class="data-block2">
+								<div class="data-title">
+									<i class="icon-speed"></i>
+								</div>
+								<div class="data-val">9.27</div>
+								<div class="data-unit">min/km</div>
+							</div>
+							<div class="data-block2">
+								<div class="data-title">
+									<i class="icon-duration"></i>
+								</div>
+								<div class="data-val">23</div>
+								<div class="data-unit">min/day</div>
+							</div>
+							<div class="data-block2">
+								<div class="data-title">
+									<i class="icon-cal"></i>
+								</div>
+								<div class="data-val">62.05</div>
+								<div class="data-unit">cal/day</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	 		</section>
+	 		
+	 		
+	 		<section class="users-wrap">
+	 		<div class="users-bgicon1"></div><div class="users-bgicon2"></div><div class="users-bgicon3"></div><div class="users-bgicon4"></div><div class="users-bgicon5"></div>
+	 		<div class="users-wrap-inner">
+				<div class="users-text">
+					<div class="users-title">
+						
+						<div>Country donation details.</div>
+					</div>
+					<div class="users-cont">In here, we provide users a better way to view data.</div>
+				</div>
+				<div class="donut_chart">
+					<img src="Source/donation.jpg">
+				</div>
+			</div>
+	 		</section>
+	 		
+	 		
+	 		
+	 		<footer class="footer"><div class="footer-wrapper"><div class="copyright">2018 &copy; Bicy-Eco.</div></div></footer>
+	 		
+	 		</div>
+	 	</div>
+	 	
+
+ 
+
+</body></html>

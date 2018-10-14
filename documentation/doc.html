@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file.html</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="html-files">HTML files</h1>
+<h2 id="homepage.html">HomePage.html</h2>
+<blockquote>
+<p>The home page of the web application.</p>
+</blockquote>
+<h2 id="loginpage.html">loginPage.html</h2>
+<blockquote>
+<p>Users login page. Checks if a user has completed his/her personal information. If yes, direct to <a href="#">infoDisplay.php</a>. If not, direct to <a href="#">signUpInfo.html</a>; direct a user to re-login once form completed.</p>
+</blockquote>
+<p>POST TO: <a href="#">login.php</a></p>
+<ul>
+<li>JavaScript:
+<ul>
+<li><a href="#">JS/formValidation.js</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="registerpage.html">registerPage.html</h2>
+<blockquote>
+<p>Users sign up page. After entering user’s email and creating password, direct a user to <a href="#">signUpInfo.html</a> to complete his personal information.</p>
+</blockquote>
+<p>POST TO: <a href="#">register.php</a></p>
+<ul>
+<li>JavaScript:
+<ul>
+<li><a href="#">JS/formValidation.js</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="currentactivity.html">currentActivity.html</h2>
+<blockquote>
+<p>Displaying users’ activity data on screen in real time.</p>
+</blockquote>
+<ul>
+<li>JavaScript:
+<ul>
+<li><a href="#">js/ajaxRefresh.js</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="signupinfo.html">signUpInfo.html</h2>
+<blockquote>
+<p>A form that users need to complete before login to personal account or start activity.</p>
+</blockquote>
+<ul>
+<li>JavaScript:
+<ul>
+<li><a href="#">JS/autoloadEmailInput.js</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="php-files">PHP Files</h1>
+<h2 id="connection.php">connection.php</h2>
+<blockquote>
+<p>Connect to <strong>postgreSQL</strong> database. Configure the database information before running the application.</p>
+</blockquote>
+<pre><code>$myname=""; 					//database name
+$user_name = "postgres"; 		//user name
+$pass="";						//password
+$host="localhost"; 			    //localhost or company server
+$port=""; 						//port
+
+</code></pre>
+<h2 id="login.php">login.php</h2>
+<blockquote>
+<p>Connect to database, get a user’s email and password entered.</p>
+</blockquote>
+<pre><code>if form incomplete{
+    inform users, and direct users to re-enter information. 
+}else{
+	checking if users have completed personal information; 
+	if not{ 
+		direct users to signUpInfo.php;
+	}else if yes{
+		setcookie('useremail', $user_email, time()+60*60*2);//2 hours;
+		direct users to infoDisplay.php;
+	}else{
+		wrong email, inform and direct user back to loginPage.html;
+	}
+
+</code></pre>
+<h2 id="register.php">register.php</h2>
+<blockquote>
+<p>Check if a user exists in the database; if yes, inform the user to log in; if not, create row and insert it into database. Next, direct users to further complete personal information.</p>
+</blockquote>
+<ul>
+<li>
+<p>insert fake personal values first into database, to prevent a user aborting the task. Fake values indicate the user has not completed his form, direct user to complete when login next time.</p>
+<pre><code>//-1 and NG are the fake values insert into the databse since personal information has not been given yet;
+$query_insert_new_user = "insert into project4900.users values('$user_email', '$password', 'NG','NG',-1,-1,-1,-1);";
+
+</code></pre>
+</li>
+</ul>
+<h2 id="infodisplay.php">infoDisplay.php</h2>
+<blockquote>
+<p>Personal account page displaying users profile, activity history data, and donation data chart.</p>
+</blockquote>
+<ul>
+<li>JavaScript:
+<ul>
+<li><a href="#">JS/formValidation.js</a></li>
+<li><a href="#">JS/ajaxHistoryScreen.js</a></li>
+<li><a href="#">js/leftComBar.js</a></li>
+<li><a href="#">js/countrySelect.js</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="signingup.php">signingUp.php</h2>
+<ul>
+<li>
+<p>update database to store users’ personal information</p>
+<pre><code>  $user_email = $_POST['email'];
+  $first_name = $_POST['firstName'];
+  $last_name = $_POST['lastName'];
+  $bodyweight = $_POST['body-weight'];
+  $height = $_POST['height'];
+  $activity_time = $_POST['activityTime'];
+  $age = $_POST['age'];
+
+</code></pre>
+</li>
+</ul>
+<h2 id="countrychoice.php">countryChoice.php</h2>
+<blockquote>
+<p>create a new row and insert into database to store the user’s country choice. Posted from <a href="#">infoDisplay.php</a>.</p>
+</blockquote>
+<h2 id="updateactivitydb.php">updateActivityDB.php</h2>
+<blockquote>
+<p>Invoked by <a href="#">ajaxRefresh.js</a>. Get variables from cookies, and update the database.</p>
+</blockquote>
+<pre><code>	$duration = $_COOKIE["duration"];
+	$watts = $_COOKIE["energy"];
+	$cal = $_COOKIE["calory"];
+	$distance = $_COOKIE["distance"];
+	$date = date("Y-m-d");
+	$time = date("h:i:s");
+	$country = $_COOKIE['country'];
+
+</code></pre>
+<h2 id="change_psw.php">change_psw.php</h2>
+<blockquote>
+<p>Posted from <a href="#">infoDisplay.php</a>. Update database to change user’s password.</p>
+</blockquote>
+<h2 id="ajaxprofile.php">ajaxProfile.php</h2>
+<blockquote>
+<p>Select a user’s information from database, store data in an array, and echo the array back to <a href="#">ajaxHistoryScreen.js</a>.</p>
+</blockquote>
+<h2 id="ajaxcuractivity.php">ajaxCurActivity.php</h2>
+<blockquote>
+<p>Invoked by <a href="#">ajaxHistoryScreen.js</a>, called every 1 second. Select a user’s personal information and current average speed from database, and echo a string contains data back to <a href="#">ajaxHistoryScreen.js</a>.</p>
+</blockquote>
+<h2 id="ajaxlstweekscreen.php">ajaxLstWeekScreen.php</h2>
+<blockquote>
+<p>Invoked by <a href="#">ajaxHistoryScreen.js</a>. Select users last week activity data from database, store data in an array, and echo the array back to <a href="#">ajaxHistoryScreen.js</a>.</p>
+</blockquote>
+<h2 id="ajaxlastmonthhistory.php">ajaxLastMonthHistory.php</h2>
+<blockquote>
+<p>Invoked by <a href="#">ajaxHistoryScreen.js</a>. Select users last 30 days activity data from database, store data in an array, and echo the array back to <a href="#">ajaxHistoryScreen.js</a>.</p>
+</blockquote>
+<h2 id="ajaxactivityoverview.php">ajaxActivityOverview.php</h2>
+<blockquote>
+<p>Invoked by <a href="#">ajaxHistoryScreen.js</a>. Select users last week activity data from database, store data in an array, and echo the array back to <a href="#">ajaxHistoryScreen.js</a>.</p>
+</blockquote>
+<h2 id="ajaxdonation.php">ajaxDonation.php</h2>
+<blockquote>
+<p>Invoked by <a href="#">ajaxHistoryScreen.js</a>. Select all countries donation data from database, store data in an array, and echo the array back to <a href="#">ajaxHistoryScreen.js</a>.</p>
+</blockquote>
+<h1 id="javascript-files">Javascript Files</h1>
+<h2 id="leftcombar.js">leftCombar.js</h2>
+<blockquote>
+<p>function change_password()</p>
+</blockquote>
+<pre><code>Set html DOM id='change_password' division to visible;
+</code></pre>
+<blockquote>
+<p>function display_overview()</p>
+</blockquote>
+<pre><code>Set html DOM id='activity_overview' division to visible;
+</code></pre>
+<blockquote>
+<p>function display_user_info()</p>
+</blockquote>
+<pre><code>Set html DOM id='user_info' division to visible;
+and set other division to hidden;
+</code></pre>
+<blockquote>
+<p>function display_frist_chart()</p>
+</blockquote>
+<pre><code>Set html DOM id='chart' division to visible;
+and set other division to hidden;
+</code></pre>
+<blockquote>
+<p>function display_second_chart()</p>
+</blockquote>
+<pre><code>Set html DOM id='second-chart' division to visible;
+and set other division to hidden;
+</code></pre>
+<blockquote>
+<p>function display_country()</p>
+</blockquote>
+<pre><code>Set html DOM id='country' division to visible;
+and set other division to hidden;
+</code></pre>
+<blockquote>
+<p>function display_donation()</p>
+</blockquote>
+<pre><code>Set html DOM id='donation_chart' division to visible;
+and set other division to hidden;
+</code></pre>
+<blockquote>
+<p>function deleteCookie()</p>
+</blockquote>
+<blockquote>
+<p>function setCookie(name,value,second)</p>
+</blockquote>
+<blockquote>
+<p>function logout()</p>
+</blockquote>
+<pre><code>clear user name cookie; direct page to home page;
+</code></pre>
+<blockquote>
+<p>function testTime()</p>
+</blockquote>
+<pre><code>Test if a mouse has moved for more than 30 minutes, log out;
+</code></pre>
+<h2 id="ajaxrefresh.js">ajaxRefresh.js</h2>
+<blockquote>
+<p>function createXMLHttpRequest()</p>
+</blockquote>
+<pre><code>Create a httpRequest object whenever one needs to open a php page;
+</code></pre>
+<blockquote>
+<p>function start()</p>
+</blockquote>
+<pre><code>Autoloaded in currentActivity.html body;
+If there is a usr logged in, 
+then set interval of displaying messages of every 5 minutes;
+</code></pre>
+<blockquote>
+<p>function Autofresh()</p>
+</blockquote>
+<pre><code>Calls createXMLHttpRequest to create a request object,
+Opens a certain php page to interact,
+Calls doAjax to perform necessary actions;
+</code></pre>
+<blockquote>
+<p>function doAjax()</p>
+</blockquote>
+<pre><code>bind variables to DOM object by using ids,
+get result passed from php page,
+the format of the data being passed is a string,
+re-set user cookie every per second to keep user logged in 
+    while he is exercising,
+calls Autofresh every per second to fresh html elements;
+</code></pre>
+<blockquote>
+<p>function updateUserActivity()</p>
+</blockquote>
+<pre><code>called when user presses stop buttion, 
+    invoke updateActivityDB.php to update the database;
+variable values are passed by cookies;
+</code></pre>
+<blockquote>
+<p>function deleteCookie(name)<br>
+function getCookie(cname)<br>
+function setCookie(name,value,second)<br>
+function counter()</p>
+</blockquote>
+<pre><code>accumulating timer every second, 
+	convert to unit in minute or hour;
+</code></pre>
+<blockquote>
+<p>function accumulate_watt(speed)</p>
+</blockquote>
+<pre><code>accmulating energy generated every seconds based on average speed;
+</code></pre>
+<blockquote>
+<p>function stopActivity()</p>
+</blockquote>
+<pre><code>when press stop, stop activity, and update database;
+clear timeout and timeInterval, calculate statistics, 
+    display message, disable stop button;
+</code></pre>
+<blockquote>
+<p>function motivationMessage()</p>
+</blockquote>
+<pre><code>display motivation message and play the prompt audio for once;
+display the message for 30 seconds, then clear it.
+</code></pre>
+<blockquote>
+<p>function message()</p>
+</blockquote>
+<pre><code>clear motivation message after displaying 30 seconds;
+</code></pre>
+<blockquote>
+<p>function cal_calories()</p>
+</blockquote>
+<pre><code>calculate calory burned based on speed;
+</code></pre>
+<blockquote>
+<p>function getEnergy(duration)</p>
+</blockquote>
+<pre><code>calculate watts will be generated for 5 minutes 
+    based on current average speed;
+</code></pre>
+<blockquote>
+<p>function dingdong()</p>
+</blockquote>
+<pre><code>play the prompt audio for once;
+</code></pre>
+<h2 id="countryselect.js">countrySelect.js</h2>
+<blockquote>
+<p>Using jQuery functions, when users selects a country from the list, functions set the value of a hidden input field to the country name.<br>
+The hidden input field is for php to get the country by using post[] later.</p>
+</blockquote>
+<h2 id="autoloademailinput.js">autoloadEmailInput.js</h2>
+<blockquote>
+<p>automatically fill in the email input in the signing up form when loading signUpInfo.html page;<br>
+html body tag calls autoload() method to fill the email input field, in case users enter an incorrect email that does not match;</p>
+</blockquote>
+<h2 id="ajaxhistoryscreen.js">ajaxHistoryScreen.js</h2>
+<blockquote>
+<p>function createXMLHttpRequest()</p>
+</blockquote>
+<pre><code>Create a httpRequest object whenever one needs to open a php page;
+</code></pre>
+<blockquote>
+<p>function start()</p>
+</blockquote>
+<pre><code>functiona auto loaded in HTML body;
+called Autofresh to start;
+</code></pre>
+<blockquote>
+<p>function Autofresh()</p>
+</blockquote>
+<pre><code>create 5 http request objects, 
+each opens a different php page to fetch according datas;
+</code></pre>
+<blockquote>
+<p>function doAjax()<br>
+function doAjax2()<br>
+function doAjax3()<br>
+function doAjax4()<br>
+function doAjax5()</p>
+</blockquote>
+<pre><code>Get HTML DOM element by ids;
+Fetch data in the format of [] from php.
+Using eval() to decode the array encode in JSON that passed from php;
+Calls functions to write charts in HTML DOM elements;
+</code></pre>
+<blockquote>
+<p>function write_user_overview(idtag, array)<br>
+function write_last_week_duration(idtag, array)<br>
+function write_lst_week_calorie(idtag, array)<br>
+function write_lst_week_distance(idtag, array)<br>
+function write_lst_week_watts(idtag, array)<br>
+function write_last_month_duration(idtag, array)<br>
+function write_lst_month_calorie(idtag, array)<br>
+function write_lst_month_distance(idtag, array)<br>
+function write_lst_month_watts(idtag, array)<br>
+function write_donation(idtag, array)</p>
+</blockquote>
+<pre><code>@param: idtag: a HTML DOM element get by id.
+		array: 2-D array
+</code></pre>
+<blockquote>
+<p>function write_profile(email, name,age,weight, height,country, array)</p>
+</blockquote>
+<h2 id="emailrecover.js">emailRecover.js</h2>
+<h2 id="formvalidation.js">formValidation.js</h2>
+<blockquote>
+<p>jQuery to automatically check if users enter information in correct format using regular expressions.</p>
+</blockquote>
+<h1 id="python-file">Python File</h1>
+<h2 id="database-.py">database .py</h2>
+<blockquote>
+<p>connect to postgreSQL database, randomly generates numbers and insert into database test table to simulate a user’s activity.</p>
+</blockquote>
+<h1 id="database-pysical-model">Database Pysical Model</h1>
+<blockquote>
+<p>Includes the database schema, and initial test set information.</p>
+</blockquote>
+</div>
+</body>
+
+</html>
